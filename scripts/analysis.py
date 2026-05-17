@@ -204,6 +204,30 @@ def question5_top_25_rated_movies():
     df["Release Year"] = df["Release Year"].fillna(0).astype(int)
     print(df.to_string(index=False))
 
+def question6_reviewer_vs_tmdb_rating():
+    print("\n** Question 6: Do TV reviewer ratings match vote averages? **")
+    conn = get_connection()
+
+    df = pd.read_sql_query("""
+    SELECT 
+        t.title AS Title,
+        t.vote_average AS "Movie DB Avg Rating",
+        ROUND(AVG(r.rating),2) AS "Reviewer Average Rating",
+        ROUND(AVG(r.rating) - t.vote_average, 2) AS "Difference",
+        COUNT(r.review_id) AS "Review Count"
+    FROM tv_shows t
+    JOIN tv_reviews r ON t.tmdb_id = r.tmdb_id
+    WHERE r.rating IS NOT NULL
+    GROUP BY t.tmdb_id, t.title, t.vote_average
+    HAVING COUNT(r.review_id) >= 3
+    ORDER BY ABS(AVG(r.rating) - t.vote_average) DESC
+    LIMIT 20""", conn)
+    conn.close()
+
+    print(df.to_string(index=False))
+    print("\n**NOTE: Positive differences mean reviewers rated higher than the movie database.")
+    print("        A negative difference means reviewers rated lower than the movie database.")
+
 def main():
     """Run all Questions"""
     question1_tv_genres_by_decade()
@@ -211,6 +235,7 @@ def main():
     question3_popularity_vs_runtime()
     question4_busiest_actors_and_genres()
     question5_top_25_rated_movies()
+    question6_reviewer_vs_tmdb_rating()
 
 if __name__ == "__main__":
     main()
