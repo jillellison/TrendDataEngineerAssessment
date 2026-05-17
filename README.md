@@ -27,7 +27,9 @@ DataEngineerProject/
 ├─ scripts/
 │   ├─ ingest.py       * Downloads and loads data into SQL
 │   └─ analysis.py     * Answers 6 questions
+├─ main.py             * Run this to execute the whole project
 ├─ schema.sql          * SQL database schema
+├─ er_diagram.png      * Entity relationship diagram
 ├─ requirements.txt    * Python dependencies
 └─ README.md           * You are here
 
@@ -63,14 +65,9 @@ export KAGGLE_USERNAME="your_username"
 export KAGGLE_KEY="your_key"
 ```
 
-##Downloading the data and building database
+##Running the whole project
 ```bash
-python scripts/ingest.py
-```
-
-##Run analysis.py
-```bash
-python scripts/analysis.py
+python scripts/main.py
 ```
 Results will print and charts save in the outputs folder.
 
