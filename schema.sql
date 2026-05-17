@@ -4,7 +4,7 @@ PRAGMA foreign_keys = ON;
 
 --Create table of Movies
 
-CREATE TABLE movies (
+CREATE TABLE IF NOT EXISTS movies (
     tmdb_id             INTEGER PRIMARY KEY,
     imdb_id             TEXT,
     title               TEXT NOT NULL,
@@ -34,13 +34,13 @@ CREATE TABLE movies (
     overview            TEXT
 );
 
-CREATE INDEX idx_movies_release_year ON movies(release_year);
-CREATE INDEX idx_movies_vote_average ON movies(vote_average);
-CREATE INDEX idx_movies_popularity ON movies(popularity);
+CREATE INDEX IF NOT EXISTS idx_movies_release_year ON movies(release_year);
+CREATE INDEX IF NOT EXISTS idx_movies_vote_average ON movies(vote_average);
+CREATE INDEX IF NOT EXISTS idx_movies_popularity ON movies(popularity);
 
 --Create table of TV shows
 
-CREATE TABLE tv_shows (
+CREATE TABLE IF NOT EXISTS tv_shows (
     tmdb_id             INTEGER PRIMARY KEY,
     imdb_id             TEXT,
     title               TEXT NOT NULL,
@@ -65,12 +65,12 @@ CREATE TABLE tv_shows (
     overview            TEXT
 );
 
-CREATE INDEX idx_tv_release_year  ON tv_shows(release_year);
-CREATE INDEX idx_tv_vote_average  ON tv_shows(vote_average);
-CREATE INDEX idx_tv_popularity    ON tv_shows(popularity);
+CREATE INDEX IF NOT EXISTS idx_tv_release_year  ON tv_shows(release_year);
+CREATE INDEX IF NOT EXISTS idx_tv_vote_average  ON tv_shows(vote_average);
+CREATE INDEX IF NOT EXISTS idx_tv_popularity    ON tv_shows(popularity);
 
 --Create table of actors
-CREATE TABLE people (
+CREATE TABLE IF NOT EXISTS people (
     tmdb_id             INTEGER PRIMARY KEY,
     imdb_id             TEXT,
     name                TEXT NOT NULL,
@@ -86,19 +86,33 @@ CREATE TABLE people (
     biography           TEXT
 );
 
-CREATE INDEX idx_people_known_for_dept ON people(known_for_dept);
-CREATE INDEX idx_people_popularity ON people(popularity);
+CREATE INDEX IF NOT EXISTS idx_people_known_for_dept ON people(known_for_dept);
+CREATE INDEX IF NOT EXISTS idx_people_popularity ON people(popularity);
 
---Create reviews table
-CREATE TABLE tv_reviews(
+-- Create movie reviews table
+CREATE TABLE IF NOT EXISTS movie_reviews (
+    review_id   TEXT PRIMARY KEY,
+    tmdb_id     INTEGER NOT NULL,
+    author      TEXT,
+    rating      REAL,
+    content     TEXT,
+    created_at  TEXT,
+    FOREIGN KEY (tmdb_id) REFERENCES movies(tmdb_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_movie_reviews_tmdb_id ON movie_reviews(tmdb_id);
+CREATE INDEX IF NOT EXISTS idx_movie_reviews_rating ON movie_reviews(rating);
+
+--Create tv reviews table
+CREATE TABLE IF NOT EXISTS tv_reviews(
     review_id           TEXT PRIMARY KEY,
     tmdb_id             INTEGER NOT NULL,
     author              TEXT,
     rating              REAL,
     content             TEXT,
     created_at          TEXT,
-    FOREIGN_KEY (tmbd_id) REFERENCES tv_shows(tmbd_id)
+    FOREIGN KEY (tmdb_id) REFERENCES tv_shows(tmdb_id)
     );
 
-CREATE INDEX idx_tv_review_tmdb_id ON tv_reviews(tmbd_id);
-CREATE INDEX idx_tv_reviews_rating ON tv_reviews(rating);
+CREATE INDEX IF NOT EXISTS idx_tv_review_tmdb_id ON tv_reviews(tmdb_id);
+CREATE INDEX IF NOT EXISTS idx_tv_reviews_rating ON tv_reviews(rating);
