@@ -4,7 +4,7 @@ import subprocess
 import pandas as pd
 
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR    = os.path.join(BASE_DIR, "data", "cinegraph-2026")
 DB_PATH     = os.path.join(BASE_DIR, "cinegraph.db")
 DATASET     = "muhammetyorulmaz1/cinegraph-tmdb-movies-tv-and-people-dataset"
