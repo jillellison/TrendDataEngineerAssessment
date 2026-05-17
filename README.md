@@ -2,6 +2,15 @@
 A pipeline built with Python and SQL using
 [CineGraph TMDB Movies, TV & People Dataset](https://www.kaggle.com/datasets/muhammetyorulmaz1/cinegraph-tmdb-movies-tv-and-people-dataset) from Kaggle.
 
+##Why I picked this
+I chose this dataset because my late husband was a huge movie buff. There wasn't 
+a movie or show he hadn't seen. Working with this data felt like a way to stay connected to 
+something we both loved - tv and data. Beyond the personal connection, movies and TV shows make 
+for a great project. There are multiple naturally related entities 
+(movies, shows, people, and reviews), tons of real data, and actual 
+interesting questions to ask. Also it wasn't a bad excuse to also find my next movie to watch.
+
+
 ##Dataset
 movies.csv	22,393 
 tv_shows.csv	15,562
@@ -65,9 +74,16 @@ python scripts/analysis.py
 ```
 Results will print and charts save in the outputs folder.
 
+##Questions asked
 Question 1:  What are the most popular TV genres by decade?
+I was curious if over time, people change their interests.  I know my grandpa was big into westerns but wasn't sure if it was a generational thing or him.
 Question 2:  When looking at the highest rated movies, what is the average runtime?
+I was curious is a certain average runtime makes a movie more highly rated.  Is there a sweet spot?
 Question 3:  Do higher runtimes equal lower popularity? 
+Everyone complains when a movie is too long (Wicked) but does it change the ratings?
 Question 4: What genres do the top people tend to work in?
+Do Hollywood's elite work in similar genres or does that not matter?
 Question 5: What are the top 25 highest rated movies? 
+Honestly just curiosity - wanted to know if I'd seen them.  You see on facebook people putting add a point for each one you've seen or things like that so this was a sort of exercise like that. Spoiler I only got 6 points.
 Question 6: Do TV reviewer ratings match vote averages?
+Had to know if people watching agreed with the professionals - they didn't :)
