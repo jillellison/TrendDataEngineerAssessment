@@ -16,8 +16,8 @@ def download_data():
         return
     print("We are now downloading the dataset.  I know you're excited!")
     env = os.environ.copy()
-    env["KAGGLE_USERNAME"] = "jillellison"
-    env["KAGGLE_KEY"]="KGAT_0b2a61564127b0c696d33f189c2c5aac"
+    env["KAGGLE_USERNAME"] = os.environ.get("KAGGLE_USERNAME", "")
+    env["KAGGLE_KEY"] = os.environ.get("KAGGLE_KEY", "")
     download_path = os.path.join(BASE_DIR, "data")
     subprocess.run([
         "kaggle", "datasets", "download",
